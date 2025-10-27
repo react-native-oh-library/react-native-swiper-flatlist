@@ -88,7 +88,7 @@ export const SwiperFlatList = React.forwardRef(
 
     const _onChangeIndex = React.useCallback(
       ({ index: _index, prevIndex: _prevIndex }: { index: number; prevIndex: number }) => {
-        if (_index !== _prevIndex) {
+        if (_index !== _prevIndex && _index !== currentIndexes.index) {
           onChangeIndex?.({ index: _index, prevIndex: _prevIndex });
         }
       },
@@ -261,7 +261,7 @@ export const SwiperFlatList = React.forwardRef(
       },
       viewabilityConfigCallbackPairs:
         Platform.OS === 'ios' ? viewabilityConfigCallbackPairs.current : undefined,
-      onViewableItemsChanged: Platform.OS === 'android' ? _onViewableItemsChanged : undefined,
+      onViewableItemsChanged: Platform.OS === 'android' || 'harmony' ? _onViewableItemsChanged : undefined,
       // debug: true, // for debug
       testID: e2eID,
     };

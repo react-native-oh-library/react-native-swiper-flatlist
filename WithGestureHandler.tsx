@@ -92,7 +92,7 @@ export const SwiperFlatListWithGestureHandler = React.forwardRef(
 
     const _onChangeIndex = React.useCallback(
       ({ index: _index, prevIndex: _prevIndex }: { index: number; prevIndex: number }) => {
-        if (_index !== _prevIndex) {
+        if (_index !== _prevIndex && _index !== currentIndexes.index) {
           onChangeIndex?.({ index: _index, prevIndex: _prevIndex });
         }
       },
