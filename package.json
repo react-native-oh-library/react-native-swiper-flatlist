@@ -103,5 +103,9 @@
       "url": "https://github.com/gusgard"
     }
   ],
-  "packageManager": "yarn@3.5.0"
+  "packageManager": "yarn@3.5.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }
