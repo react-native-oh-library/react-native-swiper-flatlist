@@ -1,6 +1,6 @@
 {
   "name": "@react-native-oh-tpl/react-native-swiper-flatlist",
-  "version": "3.2.6-rc.3",
+  "version": "3.2.6-rc.4",
   "main": "index.ts",
   "harmony": {
     "alias": "react-native-swiper-flatlist"
