@@ -268,7 +268,9 @@ export const SwiperFlatListWithGestureHandler = React.forwardRef(
       },
       viewabilityConfigCallbackPairs:
         Platform.OS === 'ios' ? viewabilityConfigCallbackPairs.current : undefined,
-      onViewableItemsChanged: Platform.OS === 'android' || 'harmony' ? _onViewableItemsChanged : undefined,
+      onViewableItemsChanged: Platform.OS === 'android' || Platform.OS === 'harmony'
+        ? _onViewableItemsChanged
+        : undefined,
       // debug: true, // for debug
       testID: e2eID,
     };
