@@ -1,0 +1,205 @@
+<br/>
+
+> 模板版本：v0.4.0
+
+<p align="center">
+  <h1 align="center"> <code>react-native-swiper-flatlist</code> </h1>
+</p>
+
+本项目基于 [react-native-swiper-flatlist](https://github.com/gusgard/react-native-swiper-flatlist) 开发。
+
+|三方库名称|三方库版本|发布信息|支持RN版本|Autolink|编译API版本|社区基线版本|npm地址|
+|--|--|--|--|--|--|--|--|
+|@react-native-ohos/react-native-swiper-flatlist|~3.2.6|[Github Releases](https://github.com/react-native-oh-library/react-native-swiper-flatlist/releases)|`0.72.*`/`0.77.*`/`0.82.*`|否|API12+|3.2.5|[Npm Address](https://www.npmjs.com/package/@react-native-ohos/react-native-swiper-flatlist)|
+|@react-native-oh-tpl/react-native-swiper-flatlist|~3.2.6@deprecated|[Github Releases （deprecated）](https://github.com/react-native-oh-library/react-native-swiper-flatlist/releases)|`0.72.*`/`0.77.*`/`0.82.*`|否|API12+|3.2.5|[Npm Address](https://www.npmjs.com/package/@react-native-oh-tpl/react-native-swiper-flatlist)|
+
+## 1.安装与使用
+
+请到三方库的 Releases 发布地址查看配套的版本信息：[@react-native-ohos/react-native-swiper-flatlist Releases](https://github.com/react-native-oh-library/react-native-swiper-flatlist/releases) 。
+进入到工程目录并输入以下命令：
+
+<!-- tabs:start -->
+
+#### **npm**
+
+```bash
+npm install --save @react-native-ohos/react-native-swiper-flatlist
+```
+
+#### **yarn**
+
+```bash
+yarn add @react-native-ohos/react-native-swiper-flatlist
+```
+
+<!-- tabs:end -->
+
+### 2.示例
+
+下面的代码演示了这个库的一个用例：
+
+> [!警告] 该库在使用时，其导入名称保持不变。
+
+```javascript
+import React from 'react';
+import { Text, Dimensions, StyleSheet, View } from 'react-native';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
+
+const colors = ['tomato', 'thistle', 'skyblue', 'teal'];
+
+const App = () => (
+  <View style={styles.container}>
+    <SwiperFlatList
+      autoplay
+      autoplayDelay={2}
+      autoplayLoop
+      index={2}
+      showPagination
+      data={colors}
+      renderItem={({ item }) => (
+        <View style={[styles.child, { backgroundColor: item }]}>
+          <Text style={styles.text}>{item}</Text>
+        </View>
+      )}
+    />
+  </View>
+);
+
+const { width, height } = Dimensions.get('window');
+const styles = StyleSheet.create({
+    container: { backgroundColor: 'white', height: height * 0.7 },
+    child: { width, justifyContent: 'center', height: height * 0.5 },
+    text: { fontSize: width * 0.5, textAlign: 'center' },
+});
+
+export default App;
+```
+
+## 3.链接
+
+该库的 HarmonyOS 端实现依赖于 @react-native-ohos/react-native-safe-area-context 和 @react-native-ohos/react-native-gesture-handler 的原生代码。如果您的 HarmonyOS 项目中已经引入了这些库，则无需重新引入。您可以跳过本节中的步骤，直接进入使用环节。
+
+如果您尚未引入 react-native-safe-area-context，请参考 [@react-native-ohos/react-native-safe-area-context 文档](./react-native-safe-area-context.md) 进行安装。
+
+如果您尚未引入 react-native-gesture-handler，请参考 [@react-native-ohos/react-native-gesture-handler 文档](./react-native-gesture-handler.md) 进行安装。
+
+## 4.兼容性
+
+本文档基于以下版本验证：
+
+1. RNOH: 0.72.86；SDK：HarmonyOS 5.1.0.125；IDE：DevEco Studio 5.1.0.849；ROM：5.0.0.150；
+2. RNOH: 0.77.18；SDK：HarmonyOS 5.1.0.125；IDE：DevEco Studio 5.1.0.849；ROM：5.0.0.150；
+3. RNOH: 0.82.1; SDK: HarmonyOS 6.0.1 Release SDK; IDE: DevEco Studio 6.0.1 Release; ROM:6.0.0.120 SP7;
+
+## 5.属性
+
+> [!提示] "平台" 列表示原始第三方库支持的平台。
+
+> [!提示] 在 "HarmonyOS 支持" 列中，`是` 表示该属性在 HarmonyOS 平台上受支持，`否` 表示不支持，`部分` 表示部分支持。其用法在各平台间保持一致，效果旨在与 iOS 或 Android 的实现相匹配。
+
+### SwiperFlatList 属性
+
+|名称|描述|类型|必填|平台|HarmonyOS 支持|
+|:--|:--|:--|:--|:--|:--|
+|`data`|用于 renderItem 的数据|数组|否|全平台|是|
+|`children`|子元素|节点|否|全平台|是|
+|`renderItem`|从 data 中取出一个项目并将其渲染到列表中|FlatListProps<T>[renderItem]|否|全平台|是|
+|`onMomentumScrollEnd`|滚动结束后调用，第一个参数是当前索引|(item: { index: number }, event: any) => void|否|全平台|是|
+|`vertical`|显示垂直轮播|布尔值|否|全平台|是|
+|`index`|起始索引|数字|否|全平台|是|
+|`renderAll`|渲染所有项目|布尔值|否|全平台|是|
+|`showPagination`|显示分页器|布尔值|否|全平台|是|
+|`onChangeIndex`|每次索引改变时执行，当用户到达下一个屏幕的 60% 时索引改变|({ index: number, prevIndex: number}) => void|否|全平台|是|
+|`PaginationComponent`|覆写分页组件|节点|否|全平台|是|
+|`onViewableItemsChanged`|RN 中原生可见项发生变化|FlatListProps<T>['onViewableItemsChanged']|否|全平台|是|
+|`autoplay`|自动改变索引|布尔值|否|全平台|是|
+|`autoplayDelay`|每页之间的延迟（秒）|数字|否|全平台|是|
+|`autoplayLoop`|到达末尾后继续播放|布尔值|否|全平台|是|
+|`autoplayLoopKeepAnimation`|到达列表末尾时显示动画|布尔值|否|全平台|是|
+|`autoplayInvertDirection`|反转自动播放方向|布尔值|否|全平台|是|
+|`disableGesture`|禁用滑动手势|布尔值|否|全平台|是|
+|`e2eID`|用于自动化测试的 TestID|字符串|否|全平台|是|
+|`viewabilityConfig`|可见性配置|ViewabilityConfig|否|全平台|是|
+|`useReactNativeGestureHandler`|使用 react-native-gesture-handler 的 FlatList 代替原生 FlatList，该功能暂不支持|布尔值|否|全平台|否|
+|`paginationAccessibilityLabels`|分页项目的无障碍标签。此为可选，用于屏幕阅读器。|字符串数组|否|全平台|否|
+
+### SwiperFlatListWithGestureHandler 属性
+
+|名称|描述|类型|必填|平台|HarmonyOS 支持|
+|:--|:--|:--|:--|:--|:--|
+|`data`|用于 renderItem 的数据|数组|否|全平台|是|
+|`children`|子元素|节点|否|全平台|是|
+|`renderItem`|从 data 中取出一个项目并将其渲染到列表中|FlatListProps<T>[renderItem]|否|全平台|是|
+|`onMomentumScrollEnd`|滚动结束后调用，第一个参数是当前索引|(item: { index: number }, event: any) => void|否|全平台|是|
+|`vertical`|显示垂直轮播|布尔值|否|全平台|是|
+|`index`|起始索引|数字|否|全平台|是|
+|`renderAll`|渲染所有项目|布尔值|否|全平台|是|
+|`showPagination`|显示分页器|布尔值|否|全平台|是|
+|`onChangeIndex`|每次索引改变时执行，当用户到达下一个屏幕的 60% 时索引改变|({ index: number, prevIndex: number}) => void|否|全平台|是|
+|`PaginationComponent`|覆写分页组件|节点|否|全平台|是|
+|`onViewableItemsChanged`|RN 中原生可见项发生变化|FlatListProps<T>['onViewableItemsChanged']|否|全平台|是|
+|`autoplay`|自动改变索引|布尔值|否|全平台|是|
+|`autoplayDelay`|每页之间的延迟（秒）|数字|否|全平台|是|
+|`autoplayLoop`|到达末尾后继续播放|布尔值|否|全平台|是|
+|`autoplayLoopKeepAnimation`|到达列表末尾时显示动画|布尔值|否|全平台|是|
+|`autoplayInvertDirection`|反转自动播放方向|布尔值|否|全平台|是|
+|`disableGesture`|禁用滑动手势|布尔值|否|全平台|是|
+|`e2eID`|用于自动化测试的 TestID|字符串|否|全平台|是|
+|`viewabilityConfig`|可见性配置|ViewabilityConfig|否|全平台|是|
+|`useReactNativeGestureHandler`|使用 react-native-gesture-handler 的 FlatList 代替原生 FlatList|布尔值|否|全平台|是|
+|`paginationAccessibilityLabels`|分页项目的无障碍标签。此为可选，用于屏幕阅读器。|字符串数组|否|全平台|否|
+
+### Pagination 属性
+
+> [!提示] Pagination的属性除'paginationIndex'与'size'外，SwiperFlatListWithGestureHandler与SwiperFlatList组件也可以使用。
+
+|名称|描述|类型|必填|平台|HarmonyOS 支持|
+|:--|:--|:--|:--|:--|:--|
+|`paginationDefaultColor`|分页默认颜色|字符串|否|全平台|是|
+|`paginationActiveColor`|分页激活状态颜色|字符串|否|全平台|是|
+|`paginationStyle`|容器的样式对象|ViewStyle|否|全平台|是|
+|`paginationStyleItem`|分页项的样式对象|ViewStyle|否|全平台|是|
+|`paginationStyleItemActive`|激活状态分页项的样式对象|ViewStyle|否|全平台|是|
+|`paginationStyleItemInactive`|非激活状态分页项的样式对象|ViewStyle|否|全平台|是|
+|`onPaginationSelectedIndex`|当用户按下分页索引时执行，类似于 onChangeIndex 属性|() => void|否|全平台|是|
+|`size`|分页器大小|数字|是|全平台|是|
+|`paginationIndex`|选中的分页索引|数字|否|全平台|是|
+|`e2eID`|用于自动化测试的 TestID|字符串|否|全平台|是|
+|`paginationAccessibilityLabels`|分页项目的无障碍标签。此为可选，用于屏幕阅读器。|字符串数组|否|全平台|否|
+|`paginationTapDisabled`|防止点击分页点|布尔值|否|全平台|是|
+
+### SwiperFlatList 函数
+
+|名称|描述|类型|必填|平台|HarmonyOS 支持|
+|:--|:--|:--|:--|:--|:--|
+|`scrollToIndex`|滚动到指定索引|({ item: ScrollToIndex}) => void|否|全平台|是|
+|`getCurrentIndex`|返回当前索引|() => number|否|全平台|是|
+|`getPrevIndex`|返回上一个索引|() => number|否|全平台|是|
+|`goToFirstIndex`|跳转到第一个索引|() => void|否|全平台|是|
+|`goToLastIndex`|跳转到最后一个索引|() => void|否|全平台|是|
+
+### SwiperFlatListWithGestureHandler 函数
+
+|名称|描述|类型|必填|平台|HarmonyOS 支持|
+|:--|:--|:--|:--|:--|:--|
+|`scrollToIndex`|滚动到指定索引|({ item: ScrollToIndex}) => void|否|全平台|是|
+|`getCurrentIndex`|返回当前索引|() => number|否|全平台|是|
+|`getPrevIndex`|返回上一个索引|() => number|否|全平台|是|
+|`goToFirstIndex`|跳转到第一个索引|() => void|否|全平台|是|
+|`goToLastIndex`|跳转到最后一个索引|() => void|否|全平台|是|
+
+### Pagination 函数
+
+|名称|描述|类型|必填|平台|HarmonyOS 支持|
+|:--|:--|:--|:--|:--|:--|
+|`scrollToIndex`|滚动到指定索引|({ index: number}) => void|是|全平台|是|
+
+## 6.遗留问题
+- [ ] 原库SwiperFlatList组件中的useReactNativeGestureHandler属性未生效，需要使用SwiperFlatListWithGestureHandler来处理。问题：[issue#18](https://github.com/react-native-oh-library/react-native-swiper-flatlist/issues/18)
+## 7.其他
+
+paginationAccessibilityLabels: 原生平台测试无效果
+
+## 8.许可证
+
+此项目根据 [The MIT License (MIT)](https://github.com/gusgard/react-native-swiper-flatlist/blob/master/LICENSE) 许可证授权。
